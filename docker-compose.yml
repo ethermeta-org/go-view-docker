@@ -38,8 +38,8 @@ services:
     depends_on:
       - db
     ## 如果通过其他方式已经构建了镜像，可将此处注释
-    build:
-      context: ./serve
+    # build:
+    #   context: ./serve
     ## 后台服务端口通过虚拟局域网访问，从nginx代理，这里可以按需打开端口
     #    ports:
     #      - "8080:8080"

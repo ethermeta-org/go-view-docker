@@ -1,6 +1,6 @@
 [submodule "ui/src"]
 	path = ui/src
-	url = https://gitee.com/AHEAD4/go-view
+	url = https://gitee.com/dromara/go-view
 	branch = master-fetch
 [submodule "serve/src"]
 	path = serve/src
