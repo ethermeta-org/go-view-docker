@@ -1,15 +1,16 @@
 # 使用pnpm环境
-FROM ianwalter/pnpm:v1.4.0 as builder
+FROM node:18-alpine as builder
 # 将环境变量文件复制到镜像，以便在后续构建中替换vite的.env文件
 COPY vite-env /
 COPY src /ui-src
 # 拉取代码并打包
 RUN set -xe; \
+	npm install -g pnpm; \
 	pnpm config set registry=https://registry.npm.taobao.org ; \
 	cd /ui-src ; \
 	cp /vite-env ./.env; \
 	pnpm install; \
-	pnpm run build;
+	NODE_OPTIONS=--max_old_space_size=8192 pnpm run build;
 # nginx
 FROM nginx:stable-alpine as server
 # 将打包结果复制到nginx
