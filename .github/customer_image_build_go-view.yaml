@@ -1,0 +1,38 @@
+
+name: Manual Build Customize Images GO VIEW
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+          lfs: 'true'
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: docker login github package
+        run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.TOKEN }}
+
+
+      - name: Build go view and push to GitHub Packages
+        uses: docker/build-push-action@v5
+        with:
+          context: "{{defaultContext}}:ui"
+          # 进入子路径比如设定GIT_AUTH_TOKEN
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.TOKEN }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/ethermeta-org/go-view:latest

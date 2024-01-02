@@ -16,6 +16,8 @@ FROM nginx:stable-alpine as server
 # 将打包结果复制到nginx
 COPY --from=builder /ui-src/dist /usr/share/nginx/html
 
+LABEL org.opencontainers.image.source=https://github.com/ethermeta-org/go-view-docker
+
 # COPY start.sh /
 # 设置入口并禁用缺省配置文件
 RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled;

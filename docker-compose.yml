@@ -16,7 +16,7 @@ x-resource:
 services:
   # 前端nginx
   ui:
-    image: hn4930/go-view:latest
+    image: ghcr.io/ethermeta-org/go-view:latest
     restart: always
     ## 等待server启动
     depends_on:
@@ -32,7 +32,7 @@ services:
       - ./ui/http.conf:/etc/nginx/conf.d/http.conf
   # 后台服务
   serve:
-    image: hn4930/go-view-serve:latest
+    image: ghcr.io/ethermeta-org/go-view-serve:latest
     restart: always
     ## 等待mysql启动
     depends_on:
@@ -68,7 +68,7 @@ services:
       MYSQL_DATABASE: springbootv2
     volumes:
       #      ## 数据库持久化
-      #      - /data/deploy/mysql:/var/lib/mysql
+      - /data/mysql/mysql:/var/lib/mysql
       ## 初始化脚本
       - ./0_init_db.sql:/docker-entrypoint-initdb.d/0_init_db.sql
       ## 业务数据初始化脚本

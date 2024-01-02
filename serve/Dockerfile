@@ -13,5 +13,8 @@ FROM openjdk:8-jdk-alpine as server
 # 将打包结果复制到centos
 COPY --from=builder /serve-src/target/app.war /app.war
 
+LABEL org.opencontainers.image.source=https://github.com/ethermeta-org/go-view-docker
+
+
 EXPOSE 8080
 ENTRYPOINT java -Duser.timezone=Asia/Shanghai -jar app.war
