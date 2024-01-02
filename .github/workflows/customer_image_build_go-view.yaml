@@ -32,7 +32,7 @@ jobs:
           # 进入子路径比如设定GIT_AUTH_TOKEN
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.TOKEN }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/ethermeta-org/go-view:latest
